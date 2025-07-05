@@ -1,0 +1,3 @@
+Extract topic and date in JSON from user query: 
+
+{input}

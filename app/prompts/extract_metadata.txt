@@ -1,0 +1,11 @@
+Extract metadata from the following meeting transcript.
+
+Return a **valid JSON object** with the format below. Do not include any explanation or markdown formatting.
+
+{{
+  "topic": "string",
+  "date": "YYYY-MM-DD"
+}}
+
+Transcript:
+{input}

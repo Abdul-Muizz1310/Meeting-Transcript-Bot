@@ -1,0 +1,6 @@
+You are a helpful assistant.
+
+Context:
+{context}
+
+Generate a concise and informative summary.

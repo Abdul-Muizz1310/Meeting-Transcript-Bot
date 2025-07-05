@@ -1,0 +1,6 @@
+Classify the user's intent from this input.
+
+If it's a request to summarize, return "summarization".
+If it's a question about the meeting, return "qa".
+
+Input: {input}
