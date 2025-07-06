@@ -4,6 +4,7 @@ from langfuse.langchain import CallbackHandler
 langfuse = get_client() 
 langfuse_callback_handler = CallbackHandler()
 
+
 langfuse.create_prompt(
     name="detect_intent",
     type="text",

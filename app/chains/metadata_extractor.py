@@ -1,12 +1,15 @@
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langfuse import Langfuse
 import json
 
+langfuse =  Langfuse()
 llm = ChatOpenAI(model="gpt-4o-mini")
 
 def extract_metadata(text):
-    prompt = PromptTemplate.from_template(open("app/prompts/extract_metadata.txt").read())
+    langfuse_prompt = langfuse.get_prompt("extract_metadata")
+    prompt = PromptTemplate.from_template(langfuse_prompt.get_langchain_prompt())
     chain = prompt | llm | StrOutputParser()
     result = chain.invoke({"input": text})
     try:
