@@ -1,14 +1,15 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-from app.langfuse_client import langfuse
 import json
+from langfuse.langchain import CallbackHandler
 
+handler = CallbackHandler()
 llm = ChatOpenAI(model="gpt-4o-mini")
 
-def extract_metadata(text):
-    prompt = langfuse.get_prompt("extract_metadata").get_langchain_prompt
+def extract_metadata(text, prompt_template):
+    prompt = prompt_template
     chain = prompt | llm | StrOutputParser()
-    result = chain.invoke({"input": text})
+    result = chain.invoke({"input": text}, config={"callbacks": [handler]})
     try:
         return json.loads(result)
     except json.JSONDecodeError:
