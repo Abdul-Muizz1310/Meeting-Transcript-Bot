@@ -20,43 +20,41 @@ This project is built to:
 ```mermaid
 flowchart TD
     subgraph Client
-        A[User: Frontend / cURL / Postman]
+        A(User: Frontend or CLI)
     end
 
-    subgraph FastAPI
-        B[/POST /upload_transcript/]
-        C[/POST /query/]
+    subgraph FastAPI_Server
+        B([POST /upload_transcript])
+        C([POST /query])
     end
 
     subgraph Chains
-        D[Metadata Extractor (LangChain -> LLM)]
-        E[Intent Classifier (LangChain -> LLM)]
-        F[Summarizer Chain (LLM w/ context)]
-        G[QA Chain (LLM w/ context)]
+        D([Metadata Extractor])
+        E([Intent Classifier])
+        F([Summarizer Chain])
+        G([QA Chain])
     end
 
-    subgraph Storage
-        H[[Astra DB - Vector Store]]
+    subgraph Vector_Storage
+        H([Astra DB Vector Store])
     end
 
-    subgraph Observability
-        I[Langfuse - Tracing / Prompt Mgmt]
+    subgraph Tracing
+        I([Langfuse Tracer])
     end
 
-    A -->|transcript| B --> D
-    D -->|topic + date metadata| H
-    B -->|trace| I
+    A -->|Transcript| B --> D
+    D -->|Metadata| H
+    B --> I
 
-    A -->|query| C --> E
-    E -->|intent| C
-    C -->|extract topic/date| D
-    C -->|vector search| H --> C
+    A -->|Query| C --> E
+    E -->|Intent| C
+    C --> D
+    C -->|Vector Query| H --> C
 
-    C -->|route: summarization| F
-    C -->|route: qa| G
-    F -->|summary| A
-    G -->|answer| A
-    C -->|trace| I
+    C -->|Summarization| F --> A
+    C -->|QA| G --> A
+    C --> I
 ```
 
 ---
