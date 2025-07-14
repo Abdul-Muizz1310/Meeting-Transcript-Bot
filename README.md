@@ -20,31 +20,31 @@ This project is built to:
 ```mermaid
 flowchart TD
     subgraph Client
-        A[User<br/>Frontend / cURL / Postman]
+        A[User: Frontend / cURL / Postman]
     end
 
     subgraph FastAPI
-        B(/POST /upload_transcript/)
-        C(/POST /query/)
+        B[/POST /upload_transcript/]
+        C[/POST /query/]
     end
 
     subgraph Chains
-        D[Metadata Extractor<br/>(LangChain → LLM)]
-        E[Intent Classifier<br/>(LangChain → LLM)]
-        F[Summarizer Chain<br/>(LLM w/ context)]
-        G[QA Chain<br/>(LLM w/ context)]
+        D[Metadata Extractor (LangChain -> LLM)]
+        E[Intent Classifier (LangChain -> LLM)]
+        F[Summarizer Chain (LLM w/ context)]
+        G[QA Chain (LLM w/ context)]
     end
 
     subgraph Storage
-        H[[Astra DB<br/>Vector Store]]
+        H[[Astra DB - Vector Store]]
     end
 
     subgraph Observability
-        I[Langfuse<br/>Tracing / Prompt Mgmt]
+        I[Langfuse - Tracing / Prompt Mgmt]
     end
 
     A -->|transcript| B --> D
-    D -->|topic + date metadata| H
+    D -->|topic + date metadata| H
     B -->|trace| I
 
     A -->|query| C --> E
@@ -187,35 +187,9 @@ python prompts.py
 
 ---
 
-## 🧪 Example Test with cURL
-
-```bash
-curl -X POST http://localhost:8000/upload_transcript -H "Content-Type: application/json" -d '{"transcript": "Yesterday we reviewed the AI project goals and challenges..."}'
-
-curl -X POST http://localhost:8000/query -H "Content-Type: application/json" -d '{"query": "What were the goals mentioned in the AI meeting?"}'
-```
-
----
-
 ## 📈 Observability with Langfuse
 
 Langfuse is used to:
 - Manage prompt templates (`detect_intent`, `extract_metadata`, `qa`, `summarizer`)
 - Trace LLM calls and visualize latency, tokens, etc.
 - Inject `CallbackHandler` for automatic logging.
-
----
-
-## 🧠 Powered By
-
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [LangChain](https://www.langchain.com/)
-- [OpenAI GPT-4o](https://platform.openai.com/)
-- [Astra DB](https://www.datastax.com/astra)
-- [Langfuse](https://langfuse.com/)
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
