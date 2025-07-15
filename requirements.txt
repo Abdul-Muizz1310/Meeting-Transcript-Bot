@@ -1,7 +1,9 @@
 fastapi
 uvicorn
 langchain
-openai
+langchain-openai
+langchain-core
 langfuse
 astrapy
 python-dotenv
+pydantic
