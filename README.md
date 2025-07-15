@@ -10,12 +10,12 @@ This project is built to:
 - 📝 Store full meeting transcripts.
 - 🤖 Classify user queries as either summarization or question answering.
 - 📡 Retrieve relevant past meetings using metadata and vector similarity.
-- 🧠 Use LLMs (GPT-4o) to answer or summarize with contextual precision.
+- 🧠 Use LLMs (GPT-4o-mini) to answer or summarize with contextual precision.
 - 🔎 Observe and manage prompts using Langfuse.
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 ```mermaid
 flowchart TD
@@ -93,7 +93,14 @@ LANGFUSE_SECRET_KEY=your_langfuse_secret_key
 LANGFUSE_HOST=https://cloud.langfuse.com
 ```
 
-### 4. Run the Application
+### 4. Run the Prompts.py
+
+```bash
+cd prompts
+python prompts.py
+```
+
+### 5. Run the Application
 
 ```bash
 uvicorn main:app --reload
@@ -101,12 +108,6 @@ uvicorn main:app --reload
 
 > API docs will be available at [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### 4. Run the Prompts.py
-
-```bash
-cd prompts
-python prompts.py
-```
 
 ---
 
