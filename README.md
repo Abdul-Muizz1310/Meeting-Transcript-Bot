@@ -103,7 +103,7 @@ python prompts.py
 ### 5. Run the Application
 
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 > API docs will be available at [http://localhost:8000/docs](http://localhost:8000/docs)
